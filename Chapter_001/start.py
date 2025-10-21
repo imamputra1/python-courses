@@ -1,6 +1,5 @@
 from typing import Dict, List, Tuple, Set, Optional, Union
 
-
 print("=== Perkenalan Pemerograman dengan Python ===")
 """
 gua akan mendokumentasikan pengetahuan gua seputar Python
@@ -27,7 +26,7 @@ was_married: bool = False
 student: bool = True
 
 print(My_massage)
-print(f"\n Hallo, nama saya: {my_name}")
+print(f"\nHallo, nama saya: {my_name}")
 print(f"Umur: {age} tahun")
 print(f"Tinggi badan: {body_height}")
 print(f"Status Pernikahan: {was_married}")
@@ -69,7 +68,7 @@ print("\n --- Fungsi Dengan Type Hints ---")
 def sapa(my_name: str) -> str:
     """fungsi menyapa dengan type hints."""
     return f"helo, {my_name}!"
-def hitung_luas_persegi(length: float, width: float) -> float:
+def hitung_luas_persegi_Panjang(length: float, width: float) -> float:
     """fungsi menghitung luas persegi panjang"""
     return length * width
 def cek_status(age: int, was_married: bool) -> Tuple[str, bool]:
@@ -86,7 +85,7 @@ def cek_status(age: int, was_married: bool) -> Tuple[str, bool]:
         return "Remaja", False
 # Kita coba menggunakan fungsi diatas
 print(sapa("Nino"))
-luas: float = hitung_luas_persegi(5.2, 3.2)
+luas: float = hitung_luas_persegi_Panjang(5.2, 3.2)
 print(f"luas: {luas}")
 
 status, eligible = cek_status(23, False)
@@ -98,7 +97,7 @@ print("\n --- 6. Collections dengan Type Hints ---")
 expertis: List[str] = ["AI-Ethics", "Econimic", "Computer science", "Philosophy"]
 angka: List[Union[int, float]] = [1, 2, 3, 4.2, 5.12]
 # Dictionary dengan type hints
-student: Dict[str, Union[str, int]] = {
+students: Dict[str, Union[str, int]] = {
     "my_name": "Imam",
     "student_id": "476713",
     "age": 23
@@ -137,3 +136,42 @@ def proses_data(data: Union[str, int, List[int]]) -> str:
 print(proses_data("hello"))
 print(proses_data(10))
 print(proses_data([1, 2, 3]))
+
+# 8. Type Aliases
+print("\n --- 8. Type Aliases --- ")
+# Kita akan membuat sebuah code yang lebih bersih
+Vector = Tuple[float, float, float]
+Person = Dict[str, Union[str, int, bool]]
+
+# kita akan membuat sebuah Aliases
+posisi: Vector = (1.2, 2.3, 3.4)
+orang: Person = {
+    "name": "Agus",
+    "age": 23,
+    "aktif": True
+}
+print(f"posisi:{posisi}")
+print(f"saya: {orang}\n")
+print("-" * 10, "memeriksa rincian tipe data didalam tuple", "-" * 10)
+data_type_posisi = [] #Objek/wadah untuk memuat hasil looping
+for element in posisi:
+    data_type_posisi.append(type(element))
+    print(f"element: {element}, tipe data: {type(element)}")
+    print("-" * 40)# loping untuk memeriksa masing masing tipe data didalam tuple
+set_tipe_tuple = set(type(element) for element in posisi) # memeriksa dengan fungsi build-in set() tipe data yang uniq
+print("\n", "-" * 10, "memeriksa rincian tipe data didalam disc", "-" * 10)
+
+for key, value in orang.items(): 
+    print(f"key: '{key}': tipe data --> {type(key)}")
+    print(f"value: '{value}': tipe data --> {type(value)}")
+    print("-" * 40)
+key_type_orang = [type(k) for k in orang.keys()]
+value_type_orang = [type(v) for v in orang.values()]
+set_tipe_dict = all(isinstance(v, str) for v in orang.values())
+print("Data Type dari Vector, posisi, Person, dan orang \n",
+      type(Vector), type(posisi), type(Person), type(orang),"\n",
+      "-" * 40,f"\n Ini adalah ringkasan tipe data tuple yang bertipe data sama: {len(set_tipe_tuple) == 1}\n tipe data: {data_type_posisi}"
+)
+print("-"* 40)
+print(f"\n ini adalah ringkasan tipe data yang ada didalam Dictionary:\n key --> {key_type_orang}\n value --> {value_type_orang}")
+

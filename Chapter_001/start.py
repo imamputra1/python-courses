@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple, Set, Optional, Union
+from typing import Any, Callable, Dict, List, Tuple, Set, Optional, Union
 
 print("=== Perkenalan Pemerograman dengan Python ===")
 """
@@ -175,3 +175,77 @@ print("Data Type dari Vector, posisi, Person, dan orang \n",
 print("-"* 40)
 print(f"\n ini adalah ringkasan tipe data yang ada didalam Dictionary:\n key --> {key_type_orang}\n value --> {value_type_orang}")
 
+# class dengan type hints
+print("\n --- 9. Class dengan Type Hints ---")
+
+class Mahasiswa:
+    """class mahasiswa dengan type hints"""
+    def __init__(self, name: str, nim: str, ipk: float) -> None:
+        self.name: str = name
+        self.nim: str = nim
+        self.ipk: float = ipk
+        self.mata_kuliah: List[str] = []
+
+    def tambah_matkul(self, matkul: str) -> None:
+        """Menambah mata kuliah"""
+        self.mata_kuliah.append(matkul)
+
+    def update_ipk(self, ipk_baru: float) -> None:
+        self.ipk = ipk_baru
+        print(f"IPK {self.name} berhasil diperbaharui {self.ipk}")
+
+    def get_info(self) -> Dict[str, Union[str, float, List[str]]]:
+        """mengembalikan (return) informasi mahasiswa"""
+        return{
+            "nama": self.name,
+            "nim": self.nim,
+            "ipk": self.ipk,
+            "mata_kuliah": self.mata_kuliah
+        }
+# Menggunakan Class
+mhs: Mahasiswa = Mahasiswa("Dea", "001100", 3.21)
+mhs.tambah_matkul("programan python")
+mhs.tambah_matkul("algoritma")
+mhs.tambah_matkul("struktur data")
+
+info: Dict[str,Union[str, float, List[str]]] = mhs.get_info()
+print(f"Info mahasiswa: {info}\n")
+
+# 10. Advanced Type Hints
+print("\n --- 10. Advanced Type Hints ---")
+# Callable type untuk fingsi
+math_opertion = Callable[[float, float], float]
+
+def apply_operation(a: float, b: float, operation: math_opertion) -> float:
+    """Menarapkan operasi matematika pada dua angka."""
+    return operation(a, b)
+
+def tambah(x: float, y: float) -> float:
+    return x + y
+def kali(x: float, y: float) -> float:
+    return x * y
+add: float = tambah(5, 2)
+multiple: float = kali(20.02, 20.25)
+
+print(f"5 + 2 = {apply_operation(5, 2, tambah)}")
+print(f"20.25 + 20.02 = {apply_operation(20.02, 20.25, kali)}")
+print("diatas kita langsung mengakases value yang ada didalam return dari fingsi tambah dan kurang tanpa menyimpan di variable")
+
+print(f"kita coba untuk memanggil dari value yang sudah disimpan di varable add: {add} dan multiple: {multiple}")
+
+# 11. Type Hint untuk memeriksa Runtime
+print("--- 11. type hint untuk memeriksa runtime ---")
+
+def validasi_data(data: Any, expected_type: type) -> bool:
+    """Validasi tipe data pada runtime"""
+    if isinstance(data, expected_type):
+        print(f"data {data} bertipe {expected_type.__name__} - VALID")
+        return True
+    else:
+        print(f"data {data} bertipe {type(data).__name__}, expected {expected_type.__name__} - INVALID")
+        return False
+# Testing Validasi
+validasi_data("hello", str)
+validasi_data(123, str)
+validasi_data([1, 2, 3], list)
+validasi_data(3.14, float)

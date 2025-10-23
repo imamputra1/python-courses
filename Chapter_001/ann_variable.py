@@ -1,21 +1,29 @@
-# variable is a object that could contain value
-# Role in write name variable can't start use symbol (! @ , etc) and number/numaric, except underscore (_)
-my_name: str = "putra"
-_my_address: str = "jln. banyu"
-My_age: int = 23
-my_bodyweight: float = 59.12
-my_languages: list = ["python", "R", "julia",]
-my_fav: dict = {"language": "python"}
+"""
+Pada file ini kita akan membahas tentang variable tentu dengan penggunakan typing style
+Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, dan 
+best practice.
+"""
 
-my_own_languages = ", ".join(my_languages)
-my_own_fav = my_fav["language"]
+print("=" * 5, "VARIABLE", "=" * 5)
 
-print(f"saya adalah {my_name} berusia {My_age} dengan berat badan {my_bodyweight}, saya tinggal {_my_address}dan saya menguasi bahasa {my_own_languages}, tapi favorit saya adalah {my_own_fav}")
+# --- Konsep dasar sebuah variable ---
+"""
+variable adalah named storege location didalam sebuah memori yang menyimpan sebuah nilai.
+python menggunakan dynamic type dengan duck type. namun disini kita menggunakan static type type
+untuk mempermudah identfikasi tipe data dan type checking untuk reliability yang lebih baik.
+"""
+print("--- 1. konsep dasar variable ---")
+# kita akan mencoba mendeklarasikan dengan type Hints
+nama: str = "Putra"
+_alamat_kos: str = "jln. banyu no. 123"
+usia: int = 23
+tinggi_badan: float = 168.99
+_status_mahasiswa: bool = True
 
-print("---Data Type---")
-print(f"my_name:{type(my_name)}")
-print(f"_my_address:{type(_my_address)}")
-print(f"My_age:{type(My_age)}")
-print(f"my_languages:{type(my_languages)}")
-print(f"my_bodyweight:{type(my_bodyweight)}")
-print(f"my_own_fav{type(my_fav)}")
+print("deklarasi tipe data\n",
+      f"nama: {nama} (type: {type(nama).__name__})\n",
+      f"alamat kos: {_alamat_kos} (type: {type(_alamat_kos).__name__})\n",
+      f"usia: {usia} (type: {type(usia).__name__})\n",
+      f"tinggi: {tinggi_badan} (type: {type(tinggi_badan).__name__})\n",
+      f"status mahasiswa: {_status_mahasiswa} (type: {type(_status_mahasiswa).__name__})\n")
+

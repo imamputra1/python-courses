@@ -4,7 +4,7 @@ Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, d
 best practice.
 """
 
-from typing import Any
+from typing import Any, Dict, List, Set, Tuple, Union
 
 
 print("=" * 5, "VARIABLE", "=" * 5)
@@ -71,7 +71,8 @@ for k, v in valid_variable.items():
     print(f"{k}: {v}")
 
 # --- type Hints dasar ---
-print("\n --- Type Hints dasar ---")
+print("\n --- 3. Type Hints dasar ---")
+
 # primitive type dengan explicit type Hints
 nama_lengkap: str = "imam putra"
 tahun_lahir: int = 2003
@@ -86,3 +87,31 @@ print("Type Hints Primitive\n",
       f"bolean value: {is_verified} --> {type(is_verified).__name__}\n",
       f"None: {empty_date} -- > {type(empty_date).__name__}\n")
 
+# --- Variable Collactions dengan Type Hints ---
+print("\n --- 4. Variable Collactions dengan Type Hints")
+
+# List 
+programming_languages: List[str] = ["python", "R", "Julia"]
+nilai_ip: List[Union[int, float]] = [4, 3.8, 37.9]
+
+# Tuple
+koordinat_3d: Tuple[float, float, float] = (10.5, 20.3, 40.0)
+data_mahasiswa: Tuple[str, int, float] = ("Nino", 23, 168.1)
+
+# Dictionary
+profile_user: Dict[str, Union[str, int, bool]] = {
+    "username": "putra_dev",
+    "email": "a.i.syahputra415@gmai.com",
+    "usia": 22,
+    "interdis_learn": True
+}
+
+# Set
+angka_unik: Set[int] = {1, 2, 3, 4, 2, 6, 1, 8} # duplikat otomatis dihapus
+kategori: Set[str] = {"Math", "AI", "Philosophy", "Economics"}
+
+print("Collactions:\n",
+      f"List: {programming_languages}\n",
+      f"Tuple: {koordinat_3d}\n",
+      f"Dictionary: {profile_user}\n",
+      f"Set: {angka_unik}")

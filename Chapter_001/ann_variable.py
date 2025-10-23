@@ -4,6 +4,9 @@ Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, d
 best practice.
 """
 
+from typing import Any
+
+
 print("=" * 5, "VARIABLE", "=" * 5)
 
 # --- Konsep dasar sebuah variable ---
@@ -26,4 +29,60 @@ print("deklarasi tipe data\n",
       f"usia: {usia} (type: {type(usia).__name__})\n",
       f"tinggi: {tinggi_badan} (type: {type(tinggi_badan).__name__})\n",
       f"status mahasiswa: {_status_mahasiswa} (type: {type(_status_mahasiswa).__name__})\n")
+
+# --- Aturan Penamaan Variable ---
+"""
+1. Harus dimulai dengan huruf (A-Z, a-z) dan Underscore (_)
+2. Dapat diikuti dengan huruf, angka, dan Underscore
+3. Case Sensitive (nama != Nama != NAMA)
+4. Tidak boleh menggunakan Reserve Keyword (def, return, if, dan 30 lainnya)
+5. Menggunakan snack_case convention (PEP8):
+        PEP8:
+        1. style guide yang menjelaskan bagaimana code python harus diformat.
+        2. tujuannya adalah untuk keterbacaan dan konsistensi.
+        
+        snack_case:
+        1. konvensi penamaan (naming convention) dimana variable ditulis dengan huruf kecil 
+        dan dipisahkan dengan Underscore (_)
+        2. contoh -> nama_pengguna, total_score_tertinggi, def hitung_utang(self)
+
+        saran: selalu gunakan snack_case kecuali pada fungsi (diluar class) dan method(fugsi didalm class)
+"""
+print("\n --- 2. aturan penamaan yang valid")
+# contoh penamaan berdasarkan PEP8
+valid_variable: dict[str, Any] ={
+    "nama": "putra",
+    "nama_lengka": "imam putra",
+    "_alamat_kos": "jln. banyu",
+    "usia23": 23,
+    "ipk_3": 3.79,
+    "is_active": True,
+}
+# Contoh nama yang tidak valid
+"""
+2nama = "salah" --> tidak boleh mulai dengan angka
+nama-lengkap = "salah" --> tidak boleh menggunkan dash/hypen
+class = "salah" --> tidak boleh menggunakan Reserve Keyword
+nilai total = "salah" --> tidak ada menggunakan spasi
+"""
+
+print("Contoh penamaan valid:")
+for k, v in valid_variable.items():
+    print(f"{k}: {v}")
+
+# --- type Hints dasar ---
+print("\n --- Type Hints dasar ---")
+# primitive type dengan explicit type Hints
+nama_lengkap: str = "imam putra"
+tahun_lahir: int = 2003
+skor_ipk: float = 3.79
+is_verified: bool = True
+empty_date: None = None
+
+print("Type Hints Primitive\n",
+      f"String: {nama_lengkap} --> {type(nama_lengkap).__name__}\n",
+      f"integer: {tahun_lahir} --> {type(tahun_lahir).__name__}\n",
+      f"float: {skor_ipk} -- > {type(skor_ipk).__name__}\n",
+      f"bolean value: {is_verified} --> {type(is_verified).__name__}\n",
+      f"None: {empty_date} -- > {type(empty_date).__name__}\n")
 

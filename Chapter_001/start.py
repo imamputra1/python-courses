@@ -249,3 +249,46 @@ validasi_data("hello", str)
 validasi_data(123, str)
 validasi_data([1, 2, 3], list)
 validasi_data(3.14, float)
+
+# 12. Practical example dengan type hint
+print("\n --- Practical Example ---")
+
+def  hitung_statistik(angka_list: list[float]) -> dict[str, float]:
+    """
+    kita akan menghitung statistik dari list angka kita.
+
+    return:
+        Dict -> mean, medium, max, dan min
+    """
+    if not angka_list:
+        return {"mean": 0.0, "median": 0.0, "max": 0.0, "min": 0.0}
+    
+    sorted_list: list[float] = sorted(angka_list)
+    n: int = len(sorted_list)
+
+    mean: float = sum(sorted_list) / n
+    max_val: float = sorted_list[-1]
+    min_val: float = sorted_list[0]
+
+    if n % 2 == 0:
+        median: float = (sorted_list[n//2 - 1]) + sorted_list[n//2] / 2
+    else:
+        median: float = sorted_list[n//2]
+
+    return {
+        "mean": round(mean, 2),
+        "median": round(median, 2),
+        "max": max_val,
+        "min": min_val
+    }
+
+# menggunakan fungsi hitung statistik
+data_list: list[float] = [100, 294, 239.9, 102.3, 3, 43, 21.3, 5.3]
+statistik: dict[str, float] = hitung_statistik(data_list)
+print(f"List Data: {data_list}")
+print(f"hasil: {statistik}")
+print(statistik["mean"])
+
+simple_list: list[float] = [1, 2, 3, 4]
+simple_statistik: dict[str, float] = hitung_statistik(simple_list)
+print(simple_statistik)

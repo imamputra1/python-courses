@@ -4,19 +4,19 @@ Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, d
 best practice.
 """
 
-from typing import Any, Dict, List, Optional, Set, Tuple, Union, TypeAlias
+from typing import Any, Callable, ClassVar, Dict, Final, List, Optional, Set, Tuple, Union, TypeAlias
 
 
 print("=" * 5, "VARIABLE", "=" * 5)
 
-# --- Konsep dasar sebuah variable ---
+# --- KONSEP DASAR SEBUAH VARIABLE ---
 """
 variable adalah named storege location didalam sebuah memori yang menyimpan sebuah nilai.
 python menggunakan dynamic type dengan duck type. namun disini kita menggunakan static type type
 untuk mempermudah identfikasi tipe data dan type checking untuk reliability yang lebih baik.
 """
 print("--- 1. konsep dasar variable ---")
-# kita akan mencoba mendeklarasikan dengan type Hints
+# kita akan mencoba mendeklarasikan dengan type Hints:
 nama: str = "Putra"
 _alamat_kos: str = "jln. banyu no. 123"
 usia: int = 23
@@ -30,7 +30,7 @@ print("deklarasi tipe data\n",
       f"tinggi: {tinggi_badan} (type: {type(tinggi_badan).__name__})\n",
       f"status mahasiswa: {_status_mahasiswa} (type: {type(_status_mahasiswa).__name__})\n")
 
-# --- Aturan Penamaan Variable ---
+# --- ATURAN PENAAMAAN VARIABLE ---
 """
 1. Harus dimulai dengan huruf (A-Z, a-z) dan Underscore (_)
 2. Dapat diikuti dengan huruf, angka, dan Underscore
@@ -49,7 +49,7 @@ print("deklarasi tipe data\n",
         saran: selalu gunakan snack_case kecuali pada fungsi (diluar class) dan method(fugsi didalm class)
 """
 print("\n --- 2. aturan penamaan yang valid")
-# contoh penamaan berdasarkan PEP8
+# contoh penamaan berdasarkan PEP8:
 valid_variable: dict[str, Any] ={
     "nama": "putra",
     "nama_lengka": "imam putra",
@@ -58,7 +58,7 @@ valid_variable: dict[str, Any] ={
     "ipk_3": 3.79,
     "is_active": True,
 }
-# Contoh nama yang tidak valid
+# Contoh nama yang tidak valid:
 """
 2nama = "salah" --> tidak boleh mulai dengan angka
 nama-lengkap = "salah" --> tidak boleh menggunkan dash/hypen
@@ -70,10 +70,10 @@ print("Contoh penamaan valid:")
 for k, v in valid_variable.items():
     print(f"{k}: {v}")
 
-# --- type Hints dasar ---
+# --- TYPE HINTS DASAR---
 print("\n --- 3. Type Hints dasar ---")
 
-# primitive type dengan explicit type Hints
+# primitive type dengan explicit type Hints:
 nama_lengkap: str = "imam putra"
 tahun_lahir: int = 2003
 skor_ipk: float = 3.79
@@ -87,18 +87,18 @@ print("Type Hints Primitive\n",
       f"bolean value: {is_verified} --> {type(is_verified).__name__}\n",
       f"None: {empty_date} -- > {type(empty_date).__name__}\n")
 
-# --- Variable Collactions dengan Type Hints ---
+# --- VARIABLE COLLACTIONS DAN TYPE HINTS ---
 print("\n --- 4. Variable Collactions dengan Type Hints")
 
-# List 
+# Type countainer list:
 programming_languages: List[str] = ["python", "R", "Julia"]
 nilai_ip: List[Union[int, float]] = [4, 3.8, 37.9]
 
-# Tuple
+# Type countainer Tuple:
 koordinat_3d: Tuple[float, float, float] = (10.5, 20.3, 40.0)
 data_mahasiswa: Tuple[str, int, float] = ("Nino", 23, 168.1)
 
-# Dictionary
+# Type countainer Dictionary:
 profile_user: Dict[str, Union[str, int, bool]] = {
     "username": "putra_dev",
     "email": "a.i.syahputra415@gmai.com",
@@ -106,7 +106,7 @@ profile_user: Dict[str, Union[str, int, bool]] = {
     "interdis_learn": True
 }
 
-# Set
+# Type countainer Set:
 angka_unik: Set[int] = {1, 2, 3, 4, 2, 6, 1, 8} # duplikat otomatis dihapus
 kategori: Set[str] = {"Math", "AI", "Philosophy", "Economics"}
 
@@ -118,12 +118,12 @@ print("Collactions:\n",
 
 # --- TYPE ALIASES ---
 print("\n --- 5. Type Aliases ---")
-# kita coba menaikan kompleksitas code kita, untuk menghandlenya kita menggunkan Aliases
+# kita coba menaikan kompleksitas code kita, untuk menghandlenya kita menggunkan Aliases:
 Vector3D: TypeAlias = Tuple[float, float, float]
 Person: TypeAlias = Dict[str, Union[str, int, float, bool]]
 Matrix: TypeAlias = List[List[float]]
 
-posisi: Vector3D = (1.0, 2.5, 3,7)
+posisi: Vector3D = (1.0, 2.5, 3.7)
 user_data: Person = {
     "nama": "Nino Reysa",
     "usia": 23,
@@ -141,17 +141,17 @@ print("Type Aliases\n",
       f"Matrix: {matrix}\n")
 
 
-# --- Optional dan Type Union ---
+# --- OPTIONAL DAN UNION ---
 print("---  6. Union and Option Type ---")
-# Optional String artinya bisa string atau None
+# Optional String artinya bisa string atau None:
 name_middle: Optional[str] = None
 nomor_telpon: Optional[str] = "+628 1234567890"
 
-# Union type untuk multiple possible type
+# Union type untuk multiple possible type:
 identifier: Union[str, int] = 1234567890
 identifier = "USER_123"
 
-# complex union type
+# complex union type:
 config_value: Union[str, int, float, bool, None] = "enable"
 config_value = 43
 config_value = None
@@ -160,6 +160,93 @@ print("Optional  and Union Type")
 print(f"Middle name: {name_middle}")
 print(f"Telepon: {nomor_telpon}")
 print(f"Identifier: {identifier}")
-print(f" config_value: {config_value}")
+print(f"config_value: {config_value}")
 
+# --- CONSTANTS DAN VARIABLE ---
+print("\n --- 7. Konstanta dan Final Variable ---")
+#Konvensi: UPPERCASE untuk Konstanta:
+PI: Final[float] = 3.14159
+MAX_CONNECTIONS: Final[float] = 1000
+DATABASE_URL_: Final[str] = "postgresql://localhost:5432/app_db"
+DEFAULT_TIMEOUT: Final[int] = 30
+
+# Class variables (shared across instances):
+class AppConfig:
+    VERSION: ClassVar[str] = "1.0.0"
+    DEBUG_MODE: ClassVar[bool] = False
+    SUPPORTED_LANGUAGES: ClassVar[List[str]] =["en", "id", "ja"]
+
+print("Constanta dan Final Variable")
+print(f"PI: {PI}")
+print(f"MAX_CONNECTIONS: {MAX_CONNECTIONS}")
+print(f"App Version: {AppConfig.VERSION}")
+print(f"Debug Mode: {AppConfig.DEBUG_MODE}")
+
+# --- VARIABLE SCOPE DAN LIFETIME ---
+print("\n --- 8. Variable scope dan Lifetime ---")
+# global scope:
+counter_global: int = 0
+
+def increment_counter() -> int:
+    """Fungsi dengan variable local dan variable global"""
+    # local variable:
+    counter_local: int = 0
+    counter_local += 1
+    # Mengakses dan modify global variable:
+    global counter_global
+    counter_global += 1
+
+    return counter_local
+
+def outer_function() -> Callable[[], int]:
+    """Contoh Clouser dengan nonlocal variable."""
+    count: int = 0
+    
+    def inner_function() -> int:
+        nonlocal count # Mengacu ke variable di outer finction
+        count += 1
+        return count
+    
+    return inner_function
+# Test scope:
+print("Variable Scope:")
+local_result = increment_counter()
+print(f"Local Counter: {local_result}")
+print(f"Global Counter: {counter_global}")
+
+# Test closure:
+closure_func = outer_function()
+print(f"Closure call 1: {closure_func()}")
+print(f"Closure call 2: {closure_func()}")
+print(f"Closure call 3: {closure_func()}")
+
+# --- TYPE CONVERSION (CASTING) ---
+print("\n --- 9. Type Convention (Casting) ---")
+# Explicit type convention:
+angka_string: str = "123"
+angka_integer: int = int(angka_string)
+angka_float: float = float(angka_string)
+
+float_string: str = "45.67"
+float_value: float = float(float_string)
+int_from_float: int = int(float_value) # Truncate, Not Round
+
+# Bolean Convention:
+truthy_value: bool = bool(1) # True
+falsy_value: bool = bool(0) # False
+falsy_string: bool = bool("") #False
+
+# Collaction convention:
+list_from_tuple: List[int] = list ((1, 2, 3))
+tuple_from_list: Tuple[int, ...] = tuple([1, 2, 3])
+set_from_list: Set[int] = set ([1, 2, 3, 3])
+
+print("Type Convention")
+print(f"String '123' --> int: {angka_integer}\n",
+    f"String '123' --> float: {float_value}\n",
+    f"Float 45.67 --> int: {int_from_float}")
+print(f"Bool converstion: 1 --> {truthy_value}, 0 --> {falsy_value}, and '' -> {falsy_string}")
+print(f"Tuple type --> List: {list_from_tuple}")
+print(f"List type --> tuple: {tuple_from_list}")
+print(f"List type --> set: {set_from_list}")
 

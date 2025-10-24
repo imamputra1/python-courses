@@ -4,7 +4,7 @@ Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, d
 best practice.
 """
 
-from typing import Any, Dict, List, Set, Tuple, Union
+from typing import Any, Dict, List, Optional, Set, Tuple, Union, TypeAlias
 
 
 print("=" * 5, "VARIABLE", "=" * 5)
@@ -115,3 +115,51 @@ print("Collactions:\n",
       f"Tuple: {koordinat_3d}\n",
       f"Dictionary: {profile_user}\n",
       f"Set: {angka_unik}")
+
+# --- TYPE ALIASES ---
+print("\n --- 5. Type Aliases ---")
+# kita coba menaikan kompleksitas code kita, untuk menghandlenya kita menggunkan Aliases
+Vector3D: TypeAlias = Tuple[float, float, float]
+Person: TypeAlias = Dict[str, Union[str, int, float, bool]]
+Matrix: TypeAlias = List[List[float]]
+
+posisi: Vector3D = (1.0, 2.5, 3,7)
+user_data: Person = {
+    "nama": "Nino Reysa",
+    "usia": 23,
+    "tinggi": 169.1,
+    "is_active": True
+}
+matrix: Matrix = [
+    [1.0, 2.0, 3.0],
+    [4.0, 5.0, 6.0],
+    [7.0, 8.0, 9.0]
+]
+print("Type Aliases\n",
+      f"Vector3D: {posisi} ->\n"
+      f"User Value: {user_data}\n",
+      f"Matrix: {matrix}\n")
+
+
+# --- Optional dan Type Union ---
+print("---  6. Union and Option Type ---")
+# Optional String artinya bisa string atau None
+name_middle: Optional[str] = None
+nomor_telpon: Optional[str] = "+628 1234567890"
+
+# Union type untuk multiple possible type
+identifier: Union[str, int] = 1234567890
+identifier = "USER_123"
+
+# complex union type
+config_value: Union[str, int, float, bool, None] = "enable"
+config_value = 43
+config_value = None
+
+print("Optional  and Union Type")
+print(f"Middle name: {name_middle}")
+print(f"Telepon: {nomor_telpon}")
+print(f"Identifier: {identifier}")
+print(f" config_value: {config_value}")
+
+

@@ -5,7 +5,7 @@ best practice.
 """
 
 from typing import Any, Callable, ClassVar, Dict, Final, List, Optional, Set, Tuple, Union, TypeAlias
-
+from dataclasses import dataclass
 
 print("=" * 5, "VARIABLE", "=" * 5)
 
@@ -249,4 +249,71 @@ print(f"Bool converstion: 1 --> {truthy_value}, 0 --> {falsy_value}, and '' -> {
 print(f"Tuple type --> List: {list_from_tuple}")
 print(f"List type --> tuple: {tuple_from_list}")
 print(f"List type --> set: {set_from_list}")
+
+# --- VARIABLE OPERATIONS ---
+print("\n --- 10. Variable Operations ---")
+
+# Multi Assignment:
+x: int = 10
+y: int = 20
+z: int = 30
+
+# Swap values
+print(f"Sebelum swap: x = {x}, y = {y}")
+x, y = y, x # kita coba penulisan yang sedikit berbeda
+print(f"Sesudah Swap: x = {x}, y = {y}")
+
+# Chained Assignment
+a = b = c = 0 # semua variable mendapatkan value 0
+
+# Extended Unpacking
+numbers: List[int] = [1, 2, 3, 4, 5]
+first, *middle, last = numbers
+print(f"Unpacking: First = {first}, middle = {middle}, last = {last}")
+
+# Walrus Operator (Python 3.8+)
+if (n := len(numbers)) > 3:
+    print(f"List memiliki {n}, elements (lebih dari 3)")
+
+# --- DATACLASS UNTUK STRUCTRED DATA ---
+print("\n --- 11. Dataclass untuk structured data ---")
+
+# Membuat dataclass dari module dataclasses:
+@dataclass
+class PersonData:
+    """Dataclass untuk merepresentasikan data person"""
+    name: str
+    usia: int
+    email: str
+    is_verified: bool = False
+    skills: List[str] = None
+
+    def __post_init__(self) -> None:
+        """Initialize default values after init."""
+        if self.skills is None:
+            self.skills = []
+
+    @property
+    def tahun_lahir(self) -> int:
+        """Calculate birthday year from age."""
+        current_year: int = 2024
+        return current_year - self.usia
+
+    def tambah_skill(self, skill: str) -> None:
+        """Add new Skills"""
+        self.skills.append(skill)
+
+# Menggunakan dataclass:
+person1: PersonData = PersonData(
+    name = "putra",
+    usia = 23,
+    email = "putra@mail.test",
+    skills = ["Python", "Data analysis"]
+)
+person1.tambah_skill("Machine learning")
+
+print("DataClass Example:")
+print(f"Person: {person1.name}, usia: {person1.usia}")
+print(f"Tahun lahir: {person1.tahun_lahir}")
+print(f"Skills: {', '.join(person1.skills)}")
 

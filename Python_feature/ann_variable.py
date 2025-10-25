@@ -318,7 +318,7 @@ print(f"Tahun lahir: {person1.tahun_lahir}")
 print(f"Skills: {', '.join(person1.skills)}")
 
 # --- TYPE CHECKING DAN VALIDATION ---
-print("\n --- Type checking dan validations ---")
+print("\n --- 12. Type checking dan validations ---")
 
 def validate_and_process(data: Any, expected_type: Type) -> Any:
     """
@@ -357,3 +357,69 @@ try:
     print(f"list: '{processed_list}")
 except TypeError as e:
     print(f"Validations error: {e}")
+
+# --- PRACTICE EXAMPLE: USER PROFILE SYSTEM ---
+print("\n --- 13. User Profile System ---")
+
+# Membuat dataclass
+@dataclass
+class UserProfile:
+    """Repersentasi profile user dengan type data hints lengkap,"""
+    username: str
+    email: str
+    age: int
+    height: float
+    weight: float
+    intrests: List[str]
+    settings: Dict[str, Any]
+    is_active: bool = True
+    primium_member: bool = False
+
+    @property
+    def bmi(self) -> float:
+        """The bmi(body mass index) property."""
+        return self.weight / ((self.height / 100) ** 2)
+
+    @property
+    def bmi_category(self) -> str:
+        """The bmi_category property."""
+        bmi_val = self.bmi
+        if bmi_val < 18.5:
+            return "UnderWeight"
+        elif bmi_val < 25:
+            return "Normal weight"
+        elif bmi_val < 30:
+            return "Over Weight"
+        else:
+            return "Obese"
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to Dictionary"""
+        return {
+            "username": self.username,
+            "email": self.email,
+            "age": self.age,
+            "height": self.age,
+            "weight": self.weight,
+            "bmi": round(self.bmi, 2),
+            "bmi_category": self.bmi_category,
+            "intrests": self.intrests,
+            "is_active": self.is_active,
+            "primium_member": self.primium_member
+        }
+
+# Create User Porfil:
+user_profile: UserProfile = UserProfile(
+    username="Putra_ibu",
+    email="putra@ibu.acc",
+    age=23,
+    height=168.1,
+    weight=57.1,
+    intrests=["Economics", "Philosophy", "computational linguistics"],
+    settings={"theme": "dark", "notifications": True}
+)
+
+print("User Profile System:")
+profile_data: Dict[str, Any] = user_profile.to_dict()
+for k, v in profile_data.items():
+    print(f"{k}:{v}")

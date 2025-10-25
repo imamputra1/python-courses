@@ -4,7 +4,7 @@ Typi Hints yang mudah mudah komperhensif. mencakup deklarasi, scope, lifetime, d
 best practice.
 """
 
-from typing import Any, Callable, ClassVar, Dict, Final, List, Optional, Set, Tuple, Union, TypeAlias
+from typing import Any, Callable, ClassVar, Dict, Final, List, Optional, Set, Tuple, Type, Union, TypeAlias
 from dataclasses import dataclass
 
 print("=" * 5, "VARIABLE", "=" * 5)
@@ -317,3 +317,43 @@ print(f"Person: {person1.name}, usia: {person1.usia}")
 print(f"Tahun lahir: {person1.tahun_lahir}")
 print(f"Skills: {', '.join(person1.skills)}")
 
+# --- TYPE CHECKING DAN VALIDATION ---
+print("\n --- Type checking dan validations ---")
+
+def validate_and_process(data: Any, expected_type: Type) -> Any:
+    """
+    Validasi data type dan proses.
+
+    args:
+        data: Data yang akan divalidasi.
+        expected_type: Tipe data yang diharapkan.
+    return:
+        Data yang sudah divalidasi
+    raises:
+        TypeError: Jika tipe data tidak sesuai.
+    """
+    if not isinstance(data, expected_type):
+        raise TypeError(f"expected {expected_type.__name__}, got {type(data).__name__}")
+
+    # Proses base on type:
+    if expected_type == str:
+        return data.strip().title()
+    elif expected_type in (int, float):
+        return abs(data)
+    elif expected_type == list:
+        return [item for item in data if item]
+    
+    return data
+
+# Test Validation:
+try:
+    processed_name = validate_and_process("  agus imam syahputra   ", str)
+    processed_age = validate_and_process(-25, int)
+    processed_list = validate_and_process(["a", "", "b", None, "c"], list)
+
+    print("Validations Result:")
+    print(f"Name: '{processed_name}")
+    print(f"usia: '{processed_age}")
+    print(f"list: '{processed_list}")
+except TypeError as e:
+    print(f"Validations error: {e}")
